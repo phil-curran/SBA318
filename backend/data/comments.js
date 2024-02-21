@@ -37,4 +37,4 @@ const comments = [
   },
 ];
 
-module.exports = tasks;
+module.exports = comments;
