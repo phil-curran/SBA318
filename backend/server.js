@@ -1,36 +1,32 @@
+// imports
 const express = require("express");
-const app = express();
-const port = 3000;
+const logger = require("../middleware/logger.js");
 
 // fake temp data
-const users = require("./data/users");
-const tasks = require("./data/tasks");
 const comments = require("./data/comments");
 
 // routes
-const userRoutes = require("../routes/user");
-const taskRoutes = require("../routes/task");
-const commentRoutes = require("../routes/comment");
+const userRoutes = require("../routes/users");
+const taskRoutes = require("../routes/tasks");
+const commentRoutes = require("../routes/comments");
+
+const app = express();
+const port = 3000;
 
 // register routes
-// app.use("/user", userRoutes);
-// app.use("/task", taskRoutes);
-// app.use("/comment", commentRoutes);
+app.use("/users", userRoutes);
+app.use("/tasks", taskRoutes);
+// app.use("/comments", commentRoutes);
 
 // middleware
 // error handler
 const errorLog = (err, req, res, next) => {
   res.status(400).send(err.message);
 };
-// event logging
-const reqLog = function (req, res, next) {
-  console.log(`Request received from: ${req.url}`);
-  next();
-};
 
 // register middleware
 app.use(errorLog);
-app.use(reqLog);
+app.use(logger);
 
 app.get("/", (req, res) => {
   res.send("App root!");
@@ -41,5 +37,5 @@ app.get("/api", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port: ${port}.`);
+  console.log(`Server listening on port: ${port}...`);
 });

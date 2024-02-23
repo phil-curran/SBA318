@@ -1,13 +1,11 @@
 const express = require("express");
+const logger = require("../middleware/logger.js");
+
+// instantiate router
 const router = express.Router();
 
-let temp = "temp";
-
 // middleware
-router.use((req, res, next) => {
-  console.log(`task route request: ${temp}`);
-  next();
-});
+router.use(logger);
 
 // user page routes
 router
