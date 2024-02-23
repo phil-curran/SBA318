@@ -1,6 +1,7 @@
 // imports
 const express = require("express");
-const logger = require("../middleware/logger.js");
+const routeLogger = require("../middleware/routeLogger.js");
+const errorLogger = require("../middleware/errorLogger.js");
 
 // fake temp data
 const comments = require("./data/comments");
@@ -16,17 +17,12 @@ const port = 3000;
 // register routes
 app.use("/users", userRoutes);
 app.use("/tasks", taskRoutes);
-// app.use("/comments", commentRoutes);
+app.use("/comments", commentRoutes);
 
 // middleware
-// error handler
-const errorLog = (err, req, res, next) => {
-  res.status(400).send(err.message);
-};
-
 // register middleware
-app.use(errorLog);
-app.use(logger);
+app.use(errorLogger);
+app.use(routeLogger);
 
 app.get("/", (req, res) => {
   res.send("App root!");

@@ -1,4 +1,4 @@
-const logger = (req, res, next) => {
+const routeLogger = (req, res, next) => {
   console.log("---");
   console.log("Path: ", req.originalUrl);
   console.log("Method: ", req.method);
@@ -7,4 +7,4 @@ const logger = (req, res, next) => {
   next();
 };
 
-module.exports = logger;
+module.exports = routeLogger;

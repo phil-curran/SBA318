@@ -1,23 +1,45 @@
 const express = require("express");
-const logger = require("../middleware/logger.js");
+const routeLogger = require("../middleware/routeLogger.js");
 
 // instantiate router
 const router = express.Router();
 
-// middleware
-router.use(logger);
+// import data
+const comments = require("../backend/data/comments.js");
 
-// user page routes
-router
-  .route("/")
-  .get((req, res) => {
-    res.send(`comment route - get: ${temp}`);
-  })
-  .post((req, res) => {
-    res.send(`comment route - post: ${temp}`);
-  })
-  .delete((req, res) => {
-    res.send(`comment route - delete: ${temp}`);
-  });
+// middleware
+router.use(routeLogger);
+
+// CREATE / Post Routes
+router.route("/").post((req, res) => {
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
+});
+
+// READ / Get Routes
+router.get("/", (req, res) => {
+  res.json(comments);
+});
+
+router.get("/:id", (req, res) => {
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}/${req.params.id}`
+  );
+});
+
+// UPDATE / Put Routes
+router.route("/").put((req, res) => {
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
+});
+
+// DELETE / Delete Routes
+router.route("/").delete((req, res) => {
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
+});
 
 module.exports = router;

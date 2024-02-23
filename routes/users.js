@@ -1,5 +1,5 @@
 const express = require("express");
-const logger = require("../middleware/logger.js");
+const routeLogger = require("../middleware/routeLogger.js");
 
 // import data
 const users = require("../backend/data/users");
@@ -8,11 +8,13 @@ const users = require("../backend/data/users");
 const router = express.Router();
 
 // middleware
-router.use(logger);
+router.use(routeLogger);
 
 // CREATE / Post Routes
 router.route("/").post((req, res) => {
-  res.send(`user route - post: ${req.baseUrl}`);
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
 });
 
 // READ / Get Routes
@@ -21,17 +23,23 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.send(`user route - get: ${req.baseUrl}/${req.params.id}`);
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}/${req.params.id}`
+  );
 });
 
 // UPDATE / Put Routes
 router.route("/").put((req, res) => {
-  res.send(`user route - post: ${req.baseUrl}`);
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
 });
 
 // DELETE / Delete Routes
 router.route("/").delete((req, res) => {
-  res.send(`user route - delete: ${req.baseUrl}`);
+  res.send(
+    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+  );
 });
 
 module.exports = router;
