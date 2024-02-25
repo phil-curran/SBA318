@@ -23,9 +23,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}/${req.params.id}`
-  );
+  const task = tasks.find((task) => task.id == req.params.id);
+  !task
+    ? (console.log("Task not found"),
+      res.status(404).json({ error: "Task not found" }))
+    : res.json(task);
 });
 
 // CREATE / Post Routes

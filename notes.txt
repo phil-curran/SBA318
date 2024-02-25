@@ -1,1 +1,0 @@
-req.url shows the requested url

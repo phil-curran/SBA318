@@ -23,9 +23,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}/${req.params.id}`
-  );
+  const comment = comments.find((comment) => comment.id == req.params.id);
+  !comment
+    ? (console.log("Comment not found"),
+      res.status(404).json({ error: "Comment not found" }))
+    : res.json(comment);
 });
 
 // UPDATE / Put Routes

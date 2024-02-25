@@ -8,7 +8,7 @@ const users = require("../backend/data/users");
 const router = express.Router();
 
 // middleware
-router.use(routeLogger);
+// router.use(routeLogger);
 
 // CREATE / Post Routes
 router.route("/").post((req, res) => {
@@ -23,9 +23,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}/${req.params.id}`
-  );
+  const user = users.find((user) => user.id == req.params.id);
+  !user
+    ? (console.log("User not found"),
+      res.status(404).json({ error: "User not found" }))
+    : res.json(user);
 });
 
 // UPDATE / Put Routes
