@@ -8,16 +8,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
-    <link rel="stylesheet" href="./_css/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   </head>
   <body>
     <div class="container">
+      <h1>TaskMaster</h1>
       <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
 
       <article>
-        <header class="title"><%= task.title %></header>
+        <header class="title">#<%= task.id %> - <%= task.title %></header>
         <p class="snippet"><%= task.content %></p>
+        <hr />
+        <p>Added by: <%= task.userId %> on <%= task.dateAdded %></p>
       </article>
 
       <% }) %> <% } else { %>

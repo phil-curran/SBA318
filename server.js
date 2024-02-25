@@ -2,7 +2,6 @@
 const express = require("express");
 const routeLogger = require("./middleware/routeLogger.js");
 const errorLogger = require("./middleware/errorLogger.js");
-const fs = require("fs");
 
 // fake temp data
 const users = require("./data/users.js");
@@ -21,21 +20,17 @@ const port = 3000;
 app.use("/users", userRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/comments", commentRoutes);
-// app.use((req, res) => {
-//   res.status(404).render("404");
-// });
 
 // set view engine
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views", "./views");
+app.use(express.static("./public"));
 
-// middleware
 // register middleware
 app.use(errorLogger);
 app.use(routeLogger);
 
 // routes
-
 app.get("/", (req, res) => {
   res.render("index", { tasks });
 });

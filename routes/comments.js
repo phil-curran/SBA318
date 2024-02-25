@@ -11,37 +11,37 @@ const comments = require("../data/comments.js");
 router.use(routeLogger);
 
 // CREATE / Post Routes
-router.route("/").post((req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-  );
-});
+router
+  .route("/")
+  // create
+  .post((req, res) => {
+    res.send(
+      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+    );
+  })
+  // read
+  .get((req, res) => {
+    res.json(comments);
+  })
+  // update
+  .put((req, res) => {
+    res.send(
+      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+    );
+  })
+  // delete
+  .delete((req, res) => {
+    res.send(
+      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
+    );
+  });
 
-// READ / Get Routes
-router.get("/", (req, res) => {
-  res.json(comments);
-});
-
-router.get("/:id", (req, res) => {
+router.route("/:id").get((req, res) => {
   const comment = comments.find((comment) => comment.id == req.params.id);
   !comment
     ? (console.log("Comment not found"),
       res.status(404).json({ error: "Comment not found" }))
     : res.json(comment);
-});
-
-// UPDATE / Put Routes
-router.route("/").put((req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-  );
-});
-
-// DELETE / Delete Routes
-router.route("/").delete((req, res) => {
-  res.send(
-    `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-  );
 });
 
 module.exports = router;
