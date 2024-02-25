@@ -21,9 +21,9 @@ const port = 3000;
 app.use("/users", userRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/comments", commentRoutes);
-app.use((req, res) => {
-  res.status(404).render("404");
-});
+// app.use((req, res) => {
+//   res.status(404).render("404");
+// });
 
 // set view engine
 app.set("view engine", "ejs");
@@ -37,11 +37,7 @@ app.use(routeLogger);
 // routes
 
 app.get("/", (req, res) => {
-  res.render("index");
-});
-
-app.get("/api", (req, res) => {
-  res.send("Welcome to the API!");
+  res.render("index", { tasks });
 });
 
 app.listen(port, () => {

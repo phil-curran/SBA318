@@ -12,7 +12,18 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   </head>
   <body>
-    <div class="container">lolfff</div>
+    <div class="container">
+      <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
+
+      <article>
+        <header class="title"><%= task.title %></header>
+        <p class="snippet"><%= task.content %></p>
+      </article>
+
+      <% }) %> <% } else { %>
+      <p>There are no tasks to display...</p>
+      <% } %>
+    </div>
     <script src="../_js/main.js"></script>
   </body>
 </html>
