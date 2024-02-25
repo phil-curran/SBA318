@@ -5,7 +5,7 @@ const routeLogger = require("../middleware/routeLogger.js");
 const router = express.Router();
 
 // import data
-const comments = require("../data/comments.js");
+let comments = require("../data/comments.js");
 
 // middleware
 router.use(routeLogger);
@@ -33,10 +33,9 @@ router
     );
   })
   // delete
-  .delete((req, res) => {
-    res.send(
-      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-    );
+  .delete((req, res, next) => {
+    comments = comments.filter((comment) => comment.id !== req.body.id);
+    res.json(comments);
   });
 
 router.route("/:id").get((req, res) => {
