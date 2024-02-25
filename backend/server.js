@@ -2,6 +2,7 @@
 const express = require("express");
 const routeLogger = require("../middleware/routeLogger.js");
 const errorLogger = require("../middleware/errorLogger.js");
+const fs = require("fs");
 
 // fake temp data
 const comments = require("./data/comments");
