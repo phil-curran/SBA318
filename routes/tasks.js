@@ -5,7 +5,7 @@ const routeLogger = require("../middleware/routeLogger.js");
 const router = express.Router();
 
 // import data
-const tasks = require("../backend/data/tasks");
+const tasks = require("../data/tasks.js");
 
 // middleware
 router.use(routeLogger);

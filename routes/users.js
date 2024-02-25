@@ -2,7 +2,7 @@ const express = require("express");
 const routeLogger = require("../middleware/routeLogger.js");
 
 // import data
-const users = require("../backend/data/users");
+const users = require("../data/users.js");
 
 // instantiate router
 const router = express.Router();
