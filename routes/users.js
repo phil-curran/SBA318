@@ -9,6 +9,7 @@ const router = express.Router();
 
 // middleware
 router.use(routeLogger);
+router.use(express.json());
 
 // routes
 

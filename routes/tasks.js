@@ -9,6 +9,7 @@ const tasks = require("../data/tasks.js");
 
 // middleware
 router.use(routeLogger);
+router.use(express.json());
 
 // CREATE / Post Routes
 router

@@ -9,15 +9,18 @@ const comments = require("../data/comments.js");
 
 // middleware
 router.use(routeLogger);
+router.use(express.json());
 
 // CREATE / Post Routes
 router
   .route("/")
   // create
   .post((req, res) => {
-    res.send(
-      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-    );
+    // let { userId, taskParent, commentParent, title, content } = req.body;
+    let temp = { ...req.body };
+    temp.id = comments.length + 1;
+    comments.push(temp);
+    res.send(comments);
   })
   // read
   .get((req, res) => {
