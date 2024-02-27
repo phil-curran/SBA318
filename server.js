@@ -1,5 +1,6 @@
 // imports
 const express = require("express");
+const bodyParser = require("body-parser");
 const routeLogger = require("./middleware/routeLogger.js");
 const errorLogger = require("./middleware/errorLogger.js");
 
@@ -29,6 +30,8 @@ app.use(express.static("./public"));
 // register middleware
 app.use(errorLogger);
 app.use(routeLogger);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 // routes
 app.get("/", (req, res) => {

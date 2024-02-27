@@ -28,19 +28,22 @@ router
   // update
   .put((req, res) => {
     res.send("Update Route");
-  })
-  // delete
-  .delete((req, res) => {
-    res.send("Delete Route");
   });
 
 // get specific user
-router.route("/:id").get((req, res) => {
-  const user = users.find((user) => user.id == req.params.id);
-  !user
-    ? (console.log("User not found"),
-      res.status(404).json({ error: "User not found" }))
-    : res.json(user);
-});
+router
+  .route("/:id")
+  .get((req, res) => {
+    const user = users.find((user) => user.id == req.params.id);
+    !user
+      ? (console.log("User not found"),
+        res.status(404).json({ error: "User not found" }))
+      : res.json(user);
+  })
+  // delete
+  .delete((req, res, next) => {
+    users = users.filter((user) => req.params.id != user.id);
+    res.json(users);
+  });
 
 module.exports = router;

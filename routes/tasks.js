@@ -15,34 +15,35 @@ router.use(express.json());
 router
   .route("/")
   // create
-  .post((req, res) => {
+  .post((req, res, next) => {
     res.send(
       `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
     );
   })
   // read
-  .get((req, res) => {
+  .get((req, res, next) => {
     res.json(tasks);
   })
   // update
-  .put((req, res) => {
-    res.send(
-      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-    );
-  })
-  // delete
-  .delete((req, res) => {
+  .put((req, res, next) => {
     res.send(
       `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
     );
   });
 
-router.route("/:id").get((req, res) => {
-  const task = tasks.find((task) => task.id == req.params.id);
-  !task
-    ? (console.log("Task not found"),
-      res.status(404).json({ error: "Task not found" }))
-    : res.json(task);
-});
+router
+  .route("/:id")
+  .get((req, res, next) => {
+    const task = tasks.find((task) => task.id == req.params.id);
+    !task
+      ? (console.log("Task not found"),
+        res.status(404).json({ error: "Task not found" }))
+      : res.json(task);
+  })
+  // delete
+  .delete((req, res, next) => {
+    tasks = tasks.filter((task) => req.params.id != task.id);
+    res.json(tasks);
+  });
 
 module.exports = router;
