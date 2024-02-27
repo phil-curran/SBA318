@@ -15,14 +15,14 @@
     <div class="container">
       <h1>TaskMaster</h1>
       <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
-      <a href="/tasks/<%= task.id %>">
-        <article>
-          <header class="title">#<%= task.id %> - <%= task.title %></header>
-          <p class="snippet"><%= task.content %></p>
-          <hr />
-          <p>Added by: <%= task.userId %> on <%= task.dateAdded %></p>
-        </article>
-      </a>
+
+      <article>
+        <header class="title">#<%= task.id %> - <%= task.title %></header>
+        <p class="snippet"><%= task.content %></p>
+        <hr />
+        <p>Added by: <%= task.userId %> on <%= task.dateAdded %></p>
+      </article>
+
       <% }) %> <% } else { %>
       <p>There are no tasks to display...</p>
       <% } %>

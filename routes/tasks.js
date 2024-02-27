@@ -48,7 +48,8 @@ router
     !task
       ? (console.log("Task not found"),
         res.status(404).json({ error: "Task not found" }))
-      : res.json(task);
+      : // : res.json(task);
+        res.render("task-detail", { task });
   })
   // delete
   .delete((req, res, next) => {

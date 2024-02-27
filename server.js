@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/add-task", (req, res) => {
-  res.render("add-task", { tasks });
+  res.render("add-task");
 });
 
 app.listen(port, () => {
