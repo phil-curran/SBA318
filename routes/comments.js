@@ -11,7 +11,7 @@ let comments = require("../data/comments.js");
 router.use(routeLogger);
 router.use(express.json());
 
-// CREATE / Post Routes
+// ROUTES
 router
   .route("/")
   // create
@@ -35,6 +35,7 @@ router
 
 router
   .route("/:id")
+  // get specific comment
   .get((req, res, next) => {
     const comment = comments.find((comment) => comment.id == req.params.id);
     !comment

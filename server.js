@@ -38,6 +38,10 @@ app.get("/", (req, res) => {
   res.render("index", { tasks });
 });
 
+app.get("/add-task", (req, res) => {
+  res.render("add-task", { tasks });
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}...`);
 });

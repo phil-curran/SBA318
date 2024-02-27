@@ -1,25 +1,25 @@
 const express = require("express");
 const routeLogger = require("../middleware/routeLogger.js");
 
-// import data
-const users = require("../data/users.js");
-
 // instantiate router
 const router = express.Router();
+
+// import data
+let users = require("../data/users.js");
 
 // middleware
 router.use(routeLogger);
 router.use(express.json());
 
-// routes
-
+// ROUTES
 router
   .route("/")
   // create
-  .post((req, res) => {
-    res.send(
-      `Method: ${req.method}\nStatus: ${res.statusCode}\nPath: ${req.baseUrl}`
-    );
+  .post((req, res, next) => {
+    let temp = { ...req.body };
+    temp.id = users.length + 1;
+    users.push(temp);
+    res.send(users);
   })
   // read
   .get((req, res) => {
@@ -30,9 +30,9 @@ router
     res.send("Update Route");
   });
 
-// get specific user
 router
   .route("/:id")
+  // get specific user
   .get((req, res) => {
     const user = users.find((user) => user.id == req.params.id);
     !user
