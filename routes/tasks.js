@@ -1,5 +1,6 @@
 const express = require("express");
 const routeLogger = require("../middleware/routeLogger.js");
+const getUser = require("../utilities/getUser.js");
 const bodyParser = require("body-parser");
 
 // instantiate router
@@ -41,10 +42,12 @@ router
 // read: get specific task
 router.route("/:id").get((req, res, next) => {
   const task = tasks.find((task) => task.id == req.params.id);
+  let user = getUser(task.userId);
+  console.log(task);
   !task
     ? (console.log("Task not found"),
       res.status(404).json({ error: "Task not found" }))
-    : res.render("task-detail", { task, tasks, users, comments });
+    : res.render("task-detail", { task, tasks, user, comments, getUser });
 });
 
 // update task

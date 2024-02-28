@@ -18,10 +18,7 @@
         <header class="title">#<%= task.id %> - <%= task.title %></header>
         <p class="snippet"><%= task.content %></p>
         <hr />
-        <p>
-          Added by: <%= users.find(user => user.id === task.userId).name %> on
-          <%= task.dateAdded %>
-        </p>
+        <p>Added by: <%= getUser(task.userId) %> on <%= task.dateAdded %></p>
       </article>
     </div>
     <script src="../_js/main.js"></script>
