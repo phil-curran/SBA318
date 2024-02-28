@@ -1,6 +1,7 @@
 const express = require("express");
 const routeLogger = require("../middleware/routeLogger.js");
 const getUser = require("../utilities/getUser.js");
+const deleteTask = require("../utilities/deleteTask.js");
 const bodyParser = require("body-parser");
 
 // instantiate router
@@ -59,7 +60,7 @@ router.route("/").put((req, res, next) => {
 
 // delete task
 router.route("/:id").delete((req, res, next) => {
-  tasks = tasks.filter((task) => req.params.id != task.id);
+  deleteTask(req.params.id);
   res.redirect("index", { tasks });
 });
 

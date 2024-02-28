@@ -26,6 +26,10 @@
           <p class="snippet"><%= task.content %></p>
           <hr />
           <p>Added by: <%= getUserName(task) %> on <%= task.dateAdded %></p>
+          <!-- <form method="POST" action="/<%= task.id %>">
+            <input type="hidden" value="DELETE" />
+            <button type="submit">Delete</button>
+          </form> -->
         </article>
       </a>
       <% }) %> <% } else { %>
