@@ -27,7 +27,7 @@ router.route("/").post((req, res, next) => {
   let dateAdded = new Date();
   let task = { id, userId, title, content, dateAdded };
   tasks.push(task);
-  res.render("index", { tasks, users, comments });
+  res.redirect(303, "/");
 });
 
 // read: get all tasks

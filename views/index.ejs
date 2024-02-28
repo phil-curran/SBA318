@@ -14,19 +14,23 @@
   <body>
     <div class="container">
       <h1>TaskMaster</h1>
-      <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
+      <p>
+        <a href="/add-task"><button>Add Task</button></a>
+      </p>
+      <% const getUserName = (task) => { let temp = users.find((user) => user.id
+      === task.userId); return temp ? temp.name : 'Unknown User'; } %> <% if
+      (tasks.length > 0) { %> <% tasks.forEach(task => { %>
       <a href="/tasks/<%= task.id %>">
         <article>
           <header class="title">#<%= task.id %> - <%= task.title %></header>
           <p class="snippet"><%= task.content %></p>
           <hr />
-          <p>Added by: <%= task.userId %> on <%= task.dateAdded %></p>
+          <p>Added by: <%= getUserName(task) %> on <%= task.dateAdded %></p>
         </article>
       </a>
       <% }) %> <% } else { %>
       <p>There are no tasks to display...</p>
       <% } %>
     </div>
-    <script src="../_js/main.js"></script>
   </body>
 </html>
