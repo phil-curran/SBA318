@@ -35,7 +35,7 @@ app.use(bodyParser.json({ extended: true }));
 
 // routes
 app.get("/", (req, res) => {
-  res.render("index", { tasks });
+  res.render("index", { tasks, users, comments });
 });
 
 app.get("/add-task", (req, res) => {

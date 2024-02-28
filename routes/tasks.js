@@ -10,6 +10,8 @@ router.use(bodyParser.json({ extended: true }));
 
 // import data
 let tasks = require("../data/tasks.js");
+let users = require("../data/users.js");
+let comments = require("../data/comments.js");
 
 // middleware
 router.use(routeLogger);
@@ -23,9 +25,9 @@ router.route("/").post((req, res, next) => {
   let title = req.body.title;
   let content = req.body.content;
   let dateAdded = new Date();
-  let temp = { id, userId, title, content, dateAdded };
-  tasks.push(temp);
-  res.render("index", { tasks });
+  let task = { id, userId, title, content, dateAdded };
+  tasks.push(task);
+  res.render("index", { tasks, users, comments });
 });
 
 // read: get all tasks
@@ -42,7 +44,7 @@ router.route("/:id").get((req, res, next) => {
   !task
     ? (console.log("Task not found"),
       res.status(404).json({ error: "Task not found" }))
-    : res.render("task-detail", { task });
+    : res.render("task-detail", { task, tasks, users, comments });
 });
 
 // update task
